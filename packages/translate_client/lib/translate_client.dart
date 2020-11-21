@@ -6,6 +6,7 @@ export 'src/models/look_up_request.dart';
 export 'src/models/look_up_response.dart';
 export 'src/models/translate_request.dart';
 export 'src/models/translate_response.dart';
+export 'src/models/translation.dart';
 export 'src/models/word_definition.dart';
 export 'src/models/word_image.dart';
 export 'src/models/word_phrase.dart';
