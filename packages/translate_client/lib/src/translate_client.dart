@@ -8,4 +8,8 @@ class TranslateClient {
   TranslateEngine get firstEngine {
     return engines.first;
   }
+
+  TranslateEngine use(String name) {
+    return engines.firstWhere((e) => e.name == name);
+  }
 }
