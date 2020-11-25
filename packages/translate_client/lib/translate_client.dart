@@ -9,6 +9,7 @@ export 'src/models/translate_response.dart';
 export 'src/models/translation.dart';
 export 'src/models/word_definition.dart';
 export 'src/models/word_image.dart';
+export 'src/models/word_phonetic.dart';
 export 'src/models/word_phrase.dart';
 export 'src/models/word_pronunciation.dart';
 export 'src/models/word_sentence.dart';
