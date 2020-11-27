@@ -23,6 +23,15 @@ class SogouTranslateEngine extends TranslateEngine {
     this.key,
   });
 
+  factory SogouTranslateEngine.newInstance(Map<String, dynamic> json) {
+    if (json == null) return null;
+
+    return SogouTranslateEngine(
+      pid: json['pid'],
+      key: json['key'],
+    );
+  }
+
   @override
   Future<LookUpResponse> lookUp(LookUpRequest request) async {
     LookUpResponse lookUpResponse = LookUpResponse(engine: name);
