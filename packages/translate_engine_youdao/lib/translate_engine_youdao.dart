@@ -26,6 +26,15 @@ class YoudaoTranslateEngine extends TranslateEngine {
     this.appSecret,
   });
 
+  factory YoudaoTranslateEngine.newInstance(Map<String, dynamic> json) {
+    if (json == null) return null;
+
+    return YoudaoTranslateEngine(
+      appKey: json['appKey'],
+      appSecret: json['appSecret'],
+    );
+  }
+
   @override
   Future<LookUpResponse> lookUp(LookUpRequest request) async {
     LookUpResponse lookUpResponse = LookUpResponse(engine: name);
