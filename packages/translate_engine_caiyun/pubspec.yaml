@@ -8,6 +8,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  crypto: ^2.1.5
   http: ^0.12.2
   translate_client:
     path: ../translate_client

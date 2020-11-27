@@ -26,6 +26,15 @@ class CaiyunTranslateEngine extends TranslateEngine {
     this.requestId,
   });
 
+  factory CaiyunTranslateEngine.newInstance(Map<String, dynamic> json) {
+    if (json == null) return null;
+
+    return CaiyunTranslateEngine(
+      token: json['token'],
+      requestId: json['requestId'],
+    );
+  }
+
   @override
   Future<LookUpResponse> lookUp(LookUpRequest request) {
     throw UnimplementedError();
