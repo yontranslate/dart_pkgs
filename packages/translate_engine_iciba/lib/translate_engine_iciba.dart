@@ -13,6 +13,14 @@ class IcibaTranslateEngine extends TranslateEngine {
 
   IcibaTranslateEngine({this.key});
 
+  factory IcibaTranslateEngine.newInstance(Map<String, dynamic> json) {
+    if (json == null) return null;
+
+    return IcibaTranslateEngine(
+      key: json['key'],
+    );
+  }
+
   @override
   Future<LookUpResponse> lookUp(LookUpRequest request) async {
     LookUpResponse lookUpResponse = LookUpResponse(engine: name);
