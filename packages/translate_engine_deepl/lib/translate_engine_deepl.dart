@@ -10,9 +10,17 @@ class DeepLTranslateEngine extends TranslateEngine {
   String get id => '$name-xxx';
   String get name => 'deepl';
 
+  final String authKey;
+
   DeepLTranslateEngine({this.authKey});
 
-  final String authKey;
+  factory DeepLTranslateEngine.newInstance(Map<String, dynamic> json) {
+    if (json == null) return null;
+
+    return DeepLTranslateEngine(
+      authKey: json['authKey'],
+    );
+  }
 
   @override
   Future<LookUpResponse> lookUp(LookUpRequest request) {
