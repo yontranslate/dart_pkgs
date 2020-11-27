@@ -9,6 +9,14 @@ class CloudoptAITranslateEngine extends TranslateEngine {
   String get id => '$name-xxx';
   String get name => 'cloudoptai';
 
+  CloudoptAITranslateEngine();
+
+  factory CloudoptAITranslateEngine.newInstance(Map<String, dynamic> json) {
+    if (json == null) return null;
+
+    return CloudoptAITranslateEngine();
+  }
+
   @override
   Future<LookUpResponse> lookUp(LookUpRequest request) async {
     LookUpResponse lookUpResponse = LookUpResponse(engine: name);
