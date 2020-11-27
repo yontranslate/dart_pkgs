@@ -23,6 +23,15 @@ class BaiduTranslateEngine extends TranslateEngine {
     this.appKey,
   });
 
+  factory BaiduTranslateEngine.newInstance(Map<String, dynamic> json) {
+    if (json == null) return null;
+
+    return BaiduTranslateEngine(
+      appId: json['appId'],
+      appKey: json['appKey'],
+    );
+  }
+
   @override
   Future<LookUpResponse> lookUp(LookUpRequest request) async {
     throw UnimplementedError();
