@@ -27,6 +27,6 @@ class WordTense {
       'type': type,
       'name': name,
       'values': values,
-    };
+    }..removeWhere((key, value) => value == null);
   }
 }

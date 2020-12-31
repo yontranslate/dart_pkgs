@@ -23,6 +23,6 @@ class TranslateResponse {
     return {
       'engine': engine,
       'translations': translations?.map((e) => e.toJson())?.toList(),
-    };
+    }..removeWhere((key, value) => value == null);
   }
 }

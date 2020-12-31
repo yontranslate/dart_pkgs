@@ -57,6 +57,6 @@ class LookUpResponse extends TranslateResponse {
       'phrases': phrases?.map((e) => e.toJson())?.toList(),
       'tenses': tenses?.map((e) => e.toJson())?.toList(),
       'sentences': sentences?.map((e) => e.toJson())?.toList(),
-    };
+    }..removeWhere((key, value) => value == null);
   }
 }

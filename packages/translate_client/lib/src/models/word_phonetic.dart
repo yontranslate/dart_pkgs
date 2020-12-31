@@ -20,6 +20,6 @@ class WordPhonetic {
       'type': type,
       'alphabet': alphabet,
       'audioUrl': audioUrl,
-    };
+    }..removeWhere((key, value) => value == null);
   }
 }

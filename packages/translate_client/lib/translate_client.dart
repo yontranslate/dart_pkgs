@@ -2,6 +2,7 @@ library translate_client;
 
 export 'src/exceptions/not_found_exception.dart';
 
+export 'src/models/language.dart';
 export 'src/models/look_up_request.dart';
 export 'src/models/look_up_response.dart';
 export 'src/models/translate_request.dart';

@@ -20,6 +20,6 @@ class WordPronunciation {
       'type': type,
       'phoneticSymbol': phoneticSymbol,
       'audioUrl': audioUrl,
-    };
+    }..removeWhere((key, value) => value == null);
   }
 }
