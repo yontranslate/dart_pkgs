@@ -15,4 +15,20 @@ class Language {
   String name;
 
   Language(this.code, this.name);
+
+  factory Language.fromJson(Map<String, dynamic> json) {
+    if (json == null) return null;
+
+    return Language(
+      json['code'],
+      json['name'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'code': code,
+      'name': name,
+    };
+  }
 }
