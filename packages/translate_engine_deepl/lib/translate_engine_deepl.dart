@@ -34,7 +34,8 @@ class DeepLTranslateEngine extends TranslateEngine {
     Map<String, String> queryParameters = {
       'auth_key': this.authKey,
       'text': request.text,
-      'target_lang': 'ZH',
+      'source_lang': request.sourceLanguage.code.toUpperCase(),
+      'target_lang': request.targetLanguage.code.toUpperCase(),
     };
     var uri = Uri.https('api.deepl.com', '/v2/translate', queryParameters);
     print(uri.toString());
