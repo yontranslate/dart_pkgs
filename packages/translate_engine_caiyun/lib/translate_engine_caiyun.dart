@@ -2,17 +2,8 @@ library translate_engine_caiyun;
 
 import 'dart:convert';
 
-import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
 import 'package:translate_client/translate_client.dart';
-
-String _md5(String data) {
-  return md5.convert(utf8.encode(data)).toString();
-}
-
-String _sha256(String data) {
-  return sha256.convert(utf8.encode(data)).toString();
-}
 
 class CaiyunTranslateEngine extends TranslateEngine {
   String get id => '$name-xxx';
@@ -44,12 +35,18 @@ class CaiyunTranslateEngine extends TranslateEngine {
   Future<TranslateResponse> translate(TranslateRequest request) async {
     TranslateResponse translateResponse = TranslateResponse(engine: name);
 
-    var payload = {
-      "source": [request.text],
-      "trans_type": "en2zh",
-      "request_id": requestId,
+    String transType = 'auto';
+    if (request.sourceLanguage != null && request.targetLanguage != null) {
+      transType =
+          '${request.sourceLanguage.code}2${request.targetLanguage.code}';
+    }
+
+    final payload = {
+      'source': [request.text],
+      'trans_type': transType,
+      'request_id': requestId,
     };
-    var response = await http.post(
+    final response = await http.post(
       'http://api.interpreter.caiyunai.com/v1/translator',
       headers: {
         'Content-Type': 'application/json',
