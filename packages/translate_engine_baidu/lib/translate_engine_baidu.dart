@@ -7,30 +7,31 @@ import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
 import 'package:translate_client/translate_client.dart';
 
+const String kEngineTypeBaidu = 'baidu';
+
+const String _kEngineOptionKeyAppId = 'appId';
+const String _kEngineOptionKeyAppKey = 'appKey';
+
 String _md5(String data) {
   return md5.convert(utf8.encode(data)).toString();
 }
 
 class BaiduTranslateEngine extends TranslateEngine {
-  String get id => '$name-xxx';
-  String get name => 'baidu';
-
-  String appId;
-  String appKey;
+  static List<String> optionKeys = [
+    _kEngineOptionKeyAppId,
+    _kEngineOptionKeyAppKey,
+  ];
 
   BaiduTranslateEngine({
-    this.appId,
-    this.appKey,
-  });
+    String identifier,
+    String name,
+    Map<String, dynamic> option,
+  }) : super(identifier: identifier, name: name, option: option);
 
-  factory BaiduTranslateEngine.newInstance(Map<String, dynamic> json) {
-    if (json == null) return null;
+  String get type => kEngineTypeBaidu;
 
-    return BaiduTranslateEngine(
-      appId: json['appId'],
-      appKey: json['appKey'],
-    );
-  }
+  String get _optionAppId => option[_kEngineOptionKeyAppId];
+  String get _optionAppKey => option[_kEngineOptionKeyAppKey];
 
   @override
   Future<LookUpResponse> lookUp(LookUpRequest request) async {
@@ -42,7 +43,7 @@ class BaiduTranslateEngine extends TranslateEngine {
     TranslateResponse translateResponse = TranslateResponse(engine: name);
 
     final salt = Random().nextInt(999999);
-    final sign = _md5('$appId${request.text}$salt$appKey');
+    final sign = _md5('$_optionAppId${request.text}$salt$_optionAppKey');
 
     Uri uri = Uri.https(
       'fanyi-api.baidu.com',
@@ -51,7 +52,7 @@ class BaiduTranslateEngine extends TranslateEngine {
         'q': request.text,
         'from': 'auto',
         'to': 'zh',
-        'appid': this.appId,
+        'appid': _optionAppId,
         'salt': salt.toString(),
         'sign': sign.toString(),
         'dict': '0',

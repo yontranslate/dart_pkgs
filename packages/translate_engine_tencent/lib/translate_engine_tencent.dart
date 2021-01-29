@@ -7,6 +7,11 @@ import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
 import 'package:translate_client/translate_client.dart';
 
+const String kEngineTypeTencent = 'tencent';
+
+const String _kEngineOptionKeySecretId = 'secretId';
+const String _kEngineOptionKeySecretKey = 'secretKey';
+
 String _signature(String key, String data) {
   var hmacSha1 = new Hmac(sha1, utf8.encode(key));
   var digest = hmacSha1.convert(utf8.encode(data));
@@ -15,25 +20,21 @@ String _signature(String key, String data) {
 }
 
 class TencentTranslateEngine extends TranslateEngine {
-  String get id => '$name-xxx';
-  String get name => 'tencent';
-
-  String secretId;
-  String secretKey;
+   static List<String> optionKeys = [
+    _kEngineOptionKeySecretId,
+    _kEngineOptionKeySecretKey,
+  ];
 
   TencentTranslateEngine({
-    this.secretId,
-    this.secretKey,
-  });
+    String identifier,
+    String name,
+    Map<String, dynamic> option,
+  }) : super(identifier: identifier, name: name, option: option);
 
-  factory TencentTranslateEngine.newInstance(Map<String, dynamic> json) {
-    if (json == null) return null;
+  String get type => kEngineTypeTencent;
 
-    return TencentTranslateEngine(
-      secretId: json['secretId'],
-      secretKey: json['secretKey'],
-    );
-  }
+  String get _optionSecretId => option[_kEngineOptionKeySecretId];
+  String get _optionSecretKey => option[_kEngineOptionKeySecretKey];
 
   @override
   Future<LookUpResponse> lookUp(LookUpRequest request) async {
@@ -50,7 +51,7 @@ class TencentTranslateEngine extends TranslateEngine {
       'Nonce': '${Random().nextInt(9999)}',
       'ProjectId': '0',
       'Region': 'ap-guangzhou',
-      'SecretId': secretId,
+      'SecretId': _optionSecretId,
       'Source': 'auto',
       'SourceText': request.text,
       'Target': 'zh',
@@ -66,7 +67,7 @@ class TencentTranslateEngine extends TranslateEngine {
     String endpoint = 'tmt.tencentcloudapi.com';
     String srcStr = 'POST$endpoint/?${query}';
     print(srcStr);
-    String signature = _signature(this.secretKey, srcStr);
+    String signature = _signature(_optionSecretKey, srcStr);
     print(signature);
 
     queryParameters.putIfAbsent('Signature', () => signature);

@@ -5,26 +5,27 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:translate_client/translate_client.dart';
 
-class CaiyunTranslateEngine extends TranslateEngine {
-  String get id => '$name-xxx';
-  String get name => 'caiyun';
+const String kEngineTypeCaiyun = 'caiyun';
 
-  String token;
-  String requestId;
+const String _kEngineOptionKeyToken = 'token';
+const String _kEngineOptionKeyRequestId = 'requestId';
+
+class CaiyunTranslateEngine extends TranslateEngine {
+  static List<String> optionKeys = [
+    _kEngineOptionKeyToken,
+    _kEngineOptionKeyRequestId,
+  ];
 
   CaiyunTranslateEngine({
-    this.token,
-    this.requestId,
-  });
+    String identifier,
+    String name,
+    Map<String, dynamic> option,
+  }) : super(identifier: identifier, name: name, option: option);
 
-  factory CaiyunTranslateEngine.newInstance(Map<String, dynamic> json) {
-    if (json == null) return null;
+  String get type => kEngineTypeCaiyun;
 
-    return CaiyunTranslateEngine(
-      token: json['token'],
-      requestId: json['requestId'],
-    );
-  }
+  String get _optionToken => option[_kEngineOptionKeyToken];
+  String get _optionRequestId => option[_kEngineOptionKeyRequestId];
 
   @override
   Future<LookUpResponse> lookUp(LookUpRequest request) {
@@ -44,13 +45,13 @@ class CaiyunTranslateEngine extends TranslateEngine {
     final payload = {
       'source': [request.text],
       'trans_type': transType,
-      'request_id': requestId,
+      'request_id': _optionRequestId,
     };
     final response = await http.post(
       'http://api.interpreter.caiyunai.com/v1/translator',
       headers: {
         'Content-Type': 'application/json',
-        'X-Authorization': 'token ${token}',
+        'X-Authorization': 'token ${_optionToken}',
       },
       body: json.encode(payload),
     );

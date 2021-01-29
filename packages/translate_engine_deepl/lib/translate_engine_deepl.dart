@@ -6,21 +6,24 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:translate_client/translate_client.dart';
 
+const String kEngineTypeDeepL = 'deepl';
+
+const String _kEngineOptionKeyAuthKey = 'authKey';
+
 class DeepLTranslateEngine extends TranslateEngine {
-  String get id => '$name-xxx';
-  String get name => 'deepl';
+  static List<String> optionKeys = [
+    _kEngineOptionKeyAuthKey,
+  ];
 
-  final String authKey;
+  DeepLTranslateEngine({
+    String identifier,
+    String name,
+    Map<String, dynamic> option,
+  }) : super(identifier: identifier, name: name, option: option);
 
-  DeepLTranslateEngine({this.authKey});
+  String get type => kEngineTypeDeepL;
 
-  factory DeepLTranslateEngine.newInstance(Map<String, dynamic> json) {
-    if (json == null) return null;
-
-    return DeepLTranslateEngine(
-      authKey: json['authKey'],
-    );
-  }
+  String get _optionAuthKey => option[_kEngineOptionKeyAuthKey];
 
   @override
   Future<LookUpResponse> lookUp(LookUpRequest request) {
@@ -32,7 +35,7 @@ class DeepLTranslateEngine extends TranslateEngine {
     TranslateResponse translateResponse = TranslateResponse(engine: name);
 
     Map<String, String> queryParameters = {
-      'auth_key': this.authKey,
+      'auth_key': _optionAuthKey,
       'text': request.text,
       'source_lang': request.sourceLanguage.code.toUpperCase(),
       'target_lang': request.targetLanguage.code.toUpperCase(),

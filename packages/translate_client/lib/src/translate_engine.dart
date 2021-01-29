@@ -4,15 +4,25 @@ import 'models/translate_request.dart';
 import 'models/translate_response.dart';
 
 abstract class TranslateEngine {
-  String get id;
-  String get name;
+  String get type;
+
+  String identifier;
+  String name;
+  Map<String, dynamic> option;
+
+  TranslateEngine({
+    this.identifier,
+    this.name,
+    this.option,
+  });
 
   Future<LookUpResponse> lookUp(LookUpRequest request);
   Future<TranslateResponse> translate(TranslateRequest request);
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      'identifier': identifier,
+      'type': type,
       'name': name,
     };
   }

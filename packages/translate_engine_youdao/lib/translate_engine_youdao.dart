@@ -6,6 +6,11 @@ import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
 import 'package:translate_client/translate_client.dart';
 
+const String kEngineTypeYoudao = 'youdao';
+
+const String _kEngineOptionKeyAppKey = 'appKey';
+const String _kEngineOptionKeyAppSecret = 'appSecret';
+
 String _md5(String data) {
   return md5.convert(utf8.encode(data)).toString();
 }
@@ -15,25 +20,21 @@ String _sha256(String data) {
 }
 
 class YoudaoTranslateEngine extends TranslateEngine {
-  String get id => '$name-xxx';
-  String get name => 'youdao';
-
-  String appKey;
-  String appSecret;
+  static List<String> optionKeys = [
+    _kEngineOptionKeyAppKey,
+    _kEngineOptionKeyAppSecret,
+  ];
 
   YoudaoTranslateEngine({
-    this.appKey,
-    this.appSecret,
-  });
+    String identifier,
+    String name,
+    Map<String, dynamic> option,
+  }) : super(identifier: identifier, name: name, option: option);
 
-  factory YoudaoTranslateEngine.newInstance(Map<String, dynamic> json) {
-    if (json == null) return null;
+  String get type => kEngineTypeYoudao;
 
-    return YoudaoTranslateEngine(
-      appKey: json['appKey'],
-      appSecret: json['appSecret'],
-    );
-  }
+  String get _optionAppKey => option[_kEngineOptionKeyAppKey];
+  String get _optionAppSecret => option[_kEngineOptionKeyAppSecret];
 
   @override
   Future<LookUpResponse> lookUp(LookUpRequest request) async {
@@ -46,7 +47,8 @@ class YoudaoTranslateEngine extends TranslateEngine {
 
     final curtime = (DateTime.now().millisecondsSinceEpoch ~/ 1000);
     final salt = _md5("translate_engine_youdao");
-    final sign = _sha256('$appKey$input$salt${curtime}$appSecret');
+    final sign =
+        _sha256('$_optionAppKey$input$salt${curtime}$_optionAppSecret');
 
     print(curtime);
 
@@ -57,7 +59,7 @@ class YoudaoTranslateEngine extends TranslateEngine {
         'q': request.word,
         'from': 'auto',
         'to': 'auto',
-        'appKey': this.appKey,
+        'appKey': _optionAppKey,
         'salt': salt.toString(),
         'sign': sign.toString(),
         'signType': 'v3',

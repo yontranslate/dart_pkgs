@@ -7,30 +7,31 @@ import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
 import 'package:translate_client/translate_client.dart';
 
+const String kEngineTypeSogou = 'sogou';
+
+const String _kEngineOptionKeyPid = 'pid';
+const String _kEngineOptionKeyKey = 'key';
+
 String _md5(String data) {
   return md5.convert(utf8.encode(data)).toString();
 }
 
 class SogouTranslateEngine extends TranslateEngine {
-  String get id => '$name-xxx';
-  String get name => 'sogou';
-
-  String pid;
-  String key;
+  static List<String> optionKeys = [
+    _kEngineOptionKeyPid,
+    _kEngineOptionKeyKey,
+  ];
 
   SogouTranslateEngine({
-    this.pid,
-    this.key,
-  });
+    String identifier,
+    String name,
+    Map<String, dynamic> option,
+  }) : super(identifier: identifier, name: name, option: option);
 
-  factory SogouTranslateEngine.newInstance(Map<String, dynamic> json) {
-    if (json == null) return null;
+  String get type => kEngineTypeSogou;
 
-    return SogouTranslateEngine(
-      pid: json['pid'],
-      key: json['key'],
-    );
-  }
+  String get _optionPid => option[_kEngineOptionKeyPid];
+  String get _optionKey => option[_kEngineOptionKeyKey];
 
   @override
   Future<LookUpResponse> lookUp(LookUpRequest request) async {
@@ -40,7 +41,7 @@ class SogouTranslateEngine extends TranslateEngine {
 
     final curtime = (DateTime.now().millisecondsSinceEpoch ~/ 1000);
     final salt = Random().nextInt(999999);
-    final sign = _md5('$pid$q$salt$key');
+    final sign = _md5('$_optionPid$q$salt$_optionKey');
 
     print(curtime);
 
@@ -51,7 +52,7 @@ class SogouTranslateEngine extends TranslateEngine {
         'q': request.word,
         'from': 'auto',
         'to': 'zh-CHS',
-        'pid': this.pid,
+        'pid': _optionPid,
         'salt': salt.toString(),
         'sign': sign.toString(),
         'dict': 'true',

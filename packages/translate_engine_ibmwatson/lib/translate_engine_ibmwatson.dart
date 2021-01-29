@@ -5,30 +5,31 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:translate_client/translate_client.dart';
 
+const String kEngineTypeIBMWatson = 'ibmwatson';
+
+const String _kEngineOptionKeyApiKey = 'apiKey';
+const String _kEngineOptionKeyApiUrl = 'apiUrl';
+
 String _base64(String data) {
   return base64.encode(utf8.encode(data)).toString();
 }
 
 class IBMWatsonTranslateEngine extends TranslateEngine {
-  String get id => '$name-xxx';
-  String get name => 'ibmwatson';
-
-  String apiKey;
-  String apiUrl;
+  static List<String> optionKeys = [
+    _kEngineOptionKeyApiKey,
+    _kEngineOptionKeyApiUrl,
+  ];
 
   IBMWatsonTranslateEngine({
-    this.apiKey,
-    this.apiUrl,
-  });
+    String identifier,
+    String name,
+    Map<String, dynamic> option,
+  }) : super(identifier: identifier, name: name, option: option);
 
-  factory IBMWatsonTranslateEngine.newInstance(Map<String, dynamic> json) {
-    if (json == null) return null;
+  String get type => kEngineTypeIBMWatson;
 
-    return IBMWatsonTranslateEngine(
-      apiKey: json['apiKey'],
-      apiUrl: json['apiUrl'],
-    );
-  }
+  String get _optionApiKey => option[_kEngineOptionKeyApiKey];
+  String get _optionApiUrl => option[_kEngineOptionKeyApiUrl];
 
   @override
   Future<LookUpResponse> lookUp(LookUpRequest request) async {
@@ -40,9 +41,9 @@ class IBMWatsonTranslateEngine extends TranslateEngine {
     TranslateResponse translateResponse = TranslateResponse(engine: name);
 
     var response = await http.post(
-      '$apiUrl/v3/translate?version=2018-05-01',
+      '$_optionApiUrl/v3/translate?version=2018-05-01',
       headers: {
-        'Authorization': 'Basic ${_base64('apikey:$apiKey')}',
+        'Authorization': 'Basic ${_base64('apikey:$_optionApiKey')}',
         'Content-Type': 'application/json',
       },
       body: json.encode({

@@ -5,21 +5,24 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:translate_client/translate_client.dart';
 
+const String kEngineTypeIciba = 'iciba';
+
+const String _kEngineOptionKeyApiKey = 'apiKey';
+
 class IcibaTranslateEngine extends TranslateEngine {
-  String get id => '$name-xxx';
-  String get name => 'iciba';
+  static List<String> optionKeys = [
+    _kEngineOptionKeyApiKey,
+  ];
 
-  String key;
+  IcibaTranslateEngine({
+    String identifier,
+    String name,
+    Map<String, dynamic> option,
+  }) : super(identifier: identifier, name: name, option: option);
 
-  IcibaTranslateEngine({this.key});
+  String get type => kEngineTypeIciba;
 
-  factory IcibaTranslateEngine.newInstance(Map<String, dynamic> json) {
-    if (json == null) return null;
-
-    return IcibaTranslateEngine(
-      key: json['key'],
-    );
-  }
+  String get _optionApiKey => option[_kEngineOptionKeyApiKey];
 
   @override
   Future<LookUpResponse> lookUp(LookUpRequest request) async {
@@ -30,7 +33,7 @@ class IcibaTranslateEngine extends TranslateEngine {
       '/api/dictionary.php',
       {
         'w': request.word,
-        'key': this.key,
+        'key': _optionApiKey,
         'type': 'json',
       },
     );

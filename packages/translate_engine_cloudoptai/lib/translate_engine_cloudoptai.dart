@@ -5,17 +5,16 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:translate_client/translate_client.dart';
 
+const String kEngineTypeCloudoptAI = 'cloudoptai';
+
 class CloudoptAITranslateEngine extends TranslateEngine {
-  String get id => '$name-xxx';
-  String get name => 'cloudoptai';
+  String get type => kEngineTypeCloudoptAI;
 
-  CloudoptAITranslateEngine();
-
-  factory CloudoptAITranslateEngine.newInstance(Map<String, dynamic> json) {
-    if (json == null) return null;
-
-    return CloudoptAITranslateEngine();
-  }
+  CloudoptAITranslateEngine({
+    String identifier,
+    String name,
+    Map<String, dynamic> option,
+  }) : super(identifier: identifier, name: name, option: option);
 
   @override
   Future<LookUpResponse> lookUp(LookUpRequest request) async {
