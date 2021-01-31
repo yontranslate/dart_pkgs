@@ -1,4 +1,4 @@
-library translate_engine_baidu;
+library translation_engine_baidu;
 
 import 'dart:convert';
 import 'dart:math';
@@ -16,13 +16,13 @@ String _md5(String data) {
   return md5.convert(utf8.encode(data)).toString();
 }
 
-class BaiduTranslateEngine extends TranslateEngine {
+class BaiduTranslationEngine extends TranslationEngine {
   static List<String> optionKeys = [
     _kEngineOptionKeyAppId,
     _kEngineOptionKeyAppKey,
   ];
 
-  BaiduTranslateEngine({
+  BaiduTranslationEngine({
     String identifier,
     String name,
     Map<String, dynamic> option,
