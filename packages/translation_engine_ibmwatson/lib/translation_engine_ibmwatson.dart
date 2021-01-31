@@ -1,4 +1,4 @@
-library translate_engine_ibmwatson;
+library translation_engine_ibmwatson;
 
 import 'dart:convert';
 
@@ -14,13 +14,13 @@ String _base64(String data) {
   return base64.encode(utf8.encode(data)).toString();
 }
 
-class IBMWatsonTranslateEngine extends TranslateEngine {
+class IBMWatsonTranslationEngine extends TranslationEngine {
   static List<String> optionKeys = [
     _kEngineOptionKeyApiKey,
     _kEngineOptionKeyApiUrl,
   ];
 
-  IBMWatsonTranslateEngine({
+  IBMWatsonTranslationEngine({
     String identifier,
     String name,
     Map<String, dynamic> option,
