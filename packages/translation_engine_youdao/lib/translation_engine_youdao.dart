@@ -1,4 +1,4 @@
-library translate_engine_youdao;
+library translation_engine_youdao;
 
 import 'dart:convert';
 
@@ -19,13 +19,13 @@ String _sha256(String data) {
   return sha256.convert(utf8.encode(data)).toString();
 }
 
-class YoudaoTranslateEngine extends TranslateEngine {
+class YoudaoTranslationEngine extends TranslationEngine {
   static List<String> optionKeys = [
     _kEngineOptionKeyAppKey,
     _kEngineOptionKeyAppSecret,
   ];
 
-  YoudaoTranslateEngine({
+  YoudaoTranslationEngine({
     String identifier,
     String name,
     Map<String, dynamic> option,
@@ -46,7 +46,7 @@ class YoudaoTranslateEngine extends TranslateEngine {
       input = '${q.substring(0, 10)}${q.length}${q.substring(q.length - 10)}';
 
     final curtime = (DateTime.now().millisecondsSinceEpoch ~/ 1000);
-    final salt = _md5("translate_engine_youdao");
+    final salt = _md5("translation_engine_youdao");
     final sign =
         _sha256('$_optionAppKey$input$salt${curtime}$_optionAppSecret');
 
