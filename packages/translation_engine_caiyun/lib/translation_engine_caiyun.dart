@@ -1,4 +1,4 @@
-library translate_engine_caiyun;
+library translation_engine_caiyun;
 
 import 'dart:convert';
 
@@ -10,13 +10,13 @@ const String kEngineTypeCaiyun = 'caiyun';
 const String _kEngineOptionKeyToken = 'token';
 const String _kEngineOptionKeyRequestId = 'requestId';
 
-class CaiyunTranslateEngine extends TranslateEngine {
+class CaiyunTranslationEngine extends TranslationEngine {
   static List<String> optionKeys = [
     _kEngineOptionKeyToken,
     _kEngineOptionKeyRequestId,
   ];
 
-  CaiyunTranslateEngine({
+  CaiyunTranslationEngine({
     String identifier,
     String name,
     Map<String, dynamic> option,
