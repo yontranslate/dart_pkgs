@@ -1,4 +1,4 @@
-library translate_engine_iciba;
+library translation_engine_iciba;
 
 import 'dart:convert';
 
@@ -9,12 +9,12 @@ const String kEngineTypeIciba = 'iciba';
 
 const String _kEngineOptionKeyApiKey = 'apiKey';
 
-class IcibaTranslateEngine extends TranslateEngine {
+class IcibaTranslationEngine extends TranslationEngine {
   static List<String> optionKeys = [
     _kEngineOptionKeyApiKey,
   ];
 
-  IcibaTranslateEngine({
+  IcibaTranslationEngine({
     String identifier,
     String name,
     Map<String, dynamic> option,
