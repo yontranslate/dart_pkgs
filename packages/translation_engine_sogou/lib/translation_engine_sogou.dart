@@ -1,4 +1,4 @@
-library translate_engine_sogou;
+library translation_engine_sogou;
 
 import 'dart:convert';
 import 'dart:math';
@@ -16,13 +16,13 @@ String _md5(String data) {
   return md5.convert(utf8.encode(data)).toString();
 }
 
-class SogouTranslateEngine extends TranslateEngine {
+class SogouTranslationEngine extends TranslationEngine {
   static List<String> optionKeys = [
     _kEngineOptionKeyPid,
     _kEngineOptionKeyKey,
   ];
 
-  SogouTranslateEngine({
+  SogouTranslationEngine({
     String identifier,
     String name,
     Map<String, dynamic> option,

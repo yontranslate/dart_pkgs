@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 
-import 'package:translate_engine_sogou/translate_engine_sogou.dart';
+import 'package:translation_engine_sogou/translation_engine_sogou.dart';
 
 void main() {
   test('adds one to input values', () {

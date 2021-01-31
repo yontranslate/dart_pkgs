@@ -1,4 +1,4 @@
-# translate_engine_sogou
+# translation_engine_sogou
 
 ## Related Links
 
