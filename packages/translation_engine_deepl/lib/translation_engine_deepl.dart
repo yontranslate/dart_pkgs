@@ -1,4 +1,4 @@
-library translate_engine_deepl;
+library translation_engine_deepl;
 
 import 'dart:convert';
 import 'dart:io';
@@ -10,12 +10,12 @@ const String kEngineTypeDeepL = 'deepl';
 
 const String _kEngineOptionKeyAuthKey = 'authKey';
 
-class DeepLTranslateEngine extends TranslateEngine {
+class DeepLTranslationEngine extends TranslationEngine {
   static List<String> optionKeys = [
     _kEngineOptionKeyAuthKey,
   ];
 
-  DeepLTranslateEngine({
+  DeepLTranslationEngine({
     String identifier,
     String name,
     Map<String, dynamic> option,
