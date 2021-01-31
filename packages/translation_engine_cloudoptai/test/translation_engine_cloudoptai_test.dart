@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 
-import 'package:translate_engine_cloudoptai/translate_engine_cloudoptai.dart';
+import 'package:translation_engine_cloudoptai/translation_engine_cloudoptai.dart';
 
 void main() {
   test('adds one to input values', () {

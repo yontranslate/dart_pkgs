@@ -1,4 +1,4 @@
-library translate_engine_cloudoptai;
+library translation_engine_cloudoptai;
 
 import 'dart:convert';
 
@@ -7,10 +7,10 @@ import 'package:translate_client/translate_client.dart';
 
 const String kEngineTypeCloudoptAI = 'cloudoptai';
 
-class CloudoptAITranslateEngine extends TranslateEngine {
+class CloudoptAITranslationEngine extends TranslationEngine {
   String get type => kEngineTypeCloudoptAI;
 
-  CloudoptAITranslateEngine({
+  CloudoptAITranslationEngine({
     String identifier,
     String name,
     Map<String, dynamic> option,
