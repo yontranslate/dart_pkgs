@@ -1,4 +1,4 @@
-library translate_engine_tencent;
+library translation_engine_tencent;
 
 import 'dart:convert';
 import 'dart:math';
@@ -19,13 +19,13 @@ String _signature(String key, String data) {
   return base64.encode(digest.bytes).toString();
 }
 
-class TencentTranslateEngine extends TranslateEngine {
+class TencentTranslationEngine extends TranslationEngine {
    static List<String> optionKeys = [
     _kEngineOptionKeySecretId,
     _kEngineOptionKeySecretKey,
   ];
 
-  TencentTranslateEngine({
+  TencentTranslationEngine({
     String identifier,
     String name,
     Map<String, dynamic> option,
