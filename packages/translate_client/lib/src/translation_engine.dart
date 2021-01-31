@@ -3,14 +3,14 @@ import 'models/look_up_response.dart';
 import 'models/translate_request.dart';
 import 'models/translate_response.dart';
 
-abstract class TranslateEngine {
+abstract class TranslationEngine {
   String get type;
 
   String identifier;
   String name;
   Map<String, dynamic> option;
 
-  TranslateEngine({
+  TranslationEngine({
     this.identifier,
     this.name,
     this.option,
