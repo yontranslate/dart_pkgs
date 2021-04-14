@@ -69,7 +69,7 @@ class YoudaoTranslationEngine extends TranslationEngine {
 
     print(uri.toString());
 
-    var response = await http.get(uri.toString());
+    var response = await http.get(uri);
     Map<String, dynamic> data = json.decode(utf8.decode(response.bodyBytes));
     print(response.body);
 

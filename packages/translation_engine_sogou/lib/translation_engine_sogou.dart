@@ -61,7 +61,7 @@ class SogouTranslationEngine extends TranslationEngine {
 
     print(uri.toString());
 
-    var response = await http.post(uri.toString(), headers: {
+    var response = await http.post(uri, headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json',
     });

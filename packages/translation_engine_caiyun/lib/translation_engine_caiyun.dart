@@ -48,7 +48,7 @@ class CaiyunTranslationEngine extends TranslationEngine {
       'request_id': _optionRequestId,
     };
     final response = await http.post(
-      'http://api.interpreter.caiyunai.com/v1/translator',
+      Uri.parse('http://api.interpreter.caiyunai.com/v1/translator'),
       headers: {
         'Content-Type': 'application/json',
         'X-Authorization': 'token ${_optionToken}',

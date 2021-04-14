@@ -9,7 +9,7 @@ class TranslateClient {
     return engines.first;
   }
 
-  TranslationEngine use(String name) {
-    return engines.firstWhere((e) => e.name == name);
+  TranslationEngine use(String identifier) {
+    return engines.firstWhere((e) => e.identifier == identifier);
   }
 }

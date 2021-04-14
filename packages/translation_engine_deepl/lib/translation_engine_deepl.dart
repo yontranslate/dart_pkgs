@@ -43,7 +43,7 @@ class DeepLTranslationEngine extends TranslationEngine {
     var uri = Uri.https('api.deepl.com', '/v2/translate', queryParameters);
     print(uri.toString());
 
-    var response = await http.post(uri.toString(), headers: {
+    var response = await http.post(uri, headers: {
       HttpHeaders.contentTypeHeader: "application/json; charset=utf-8"
     });
 
