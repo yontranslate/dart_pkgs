@@ -47,7 +47,6 @@ class LookUpResponse extends TranslateResponse {
 
   Map<String, dynamic> toJson() {
     return {
-      'engine': super.engine,
       'word': word,
       'tip': tip,
       'definitions': definitions?.map((e) => e.toJson())?.toList(),
