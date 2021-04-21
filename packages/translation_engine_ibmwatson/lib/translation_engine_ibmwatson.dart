@@ -38,7 +38,7 @@ class IBMWatsonTranslationEngine extends TranslationEngine {
 
   @override
   Future<TranslateResponse> translate(TranslateRequest request) async {
-    TranslateResponse translateResponse = TranslateResponse(engine: name);
+    TranslateResponse translateResponse = TranslateResponse();
 
     var response = await http.post(
       '$_optionApiUrl/v3/translate?version=2018-05-01',

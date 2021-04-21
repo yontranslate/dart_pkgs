@@ -1,11 +1,9 @@
 import './translation.dart';
 
 class TranslateResponse {
-  String engine;
   List<Translation> translations;
 
   TranslateResponse({
-    this.engine,
     this.translations,
   });
 
@@ -14,14 +12,12 @@ class TranslateResponse {
     List<Translation> translations;
 
     return TranslateResponse(
-      engine: json['engine'],
       translations: translations,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'engine': engine,
       'translations': translations?.map((e) => e.toJson())?.toList(),
     }..removeWhere((key, value) => value == null);
   }

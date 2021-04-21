@@ -40,7 +40,7 @@ class BaiduTranslationEngine extends TranslationEngine {
 
   @override
   Future<TranslateResponse> translate(TranslateRequest request) async {
-    TranslateResponse translateResponse = TranslateResponse(engine: name);
+    TranslateResponse translateResponse = TranslateResponse();
 
     final salt = Random().nextInt(999999);
     final sign = _md5('$_optionAppId${request.text}$salt$_optionAppKey');

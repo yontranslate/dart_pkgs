@@ -34,7 +34,7 @@ class CaiyunTranslationEngine extends TranslationEngine {
 
   @override
   Future<TranslateResponse> translate(TranslateRequest request) async {
-    TranslateResponse translateResponse = TranslateResponse(engine: name);
+    TranslateResponse translateResponse = TranslateResponse();
 
     String transType = 'auto';
     if (request.sourceLanguage != null && request.targetLanguage != null) {
