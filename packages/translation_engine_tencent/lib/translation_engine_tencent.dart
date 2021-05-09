@@ -20,16 +20,12 @@ String _signature(String key, String data) {
 }
 
 class TencentTranslationEngine extends TranslationEngine {
-   static List<String> optionKeys = [
+  static List<String> optionKeys = [
     _kEngineOptionKeySecretId,
     _kEngineOptionKeySecretKey,
   ];
 
-  TencentTranslationEngine({
-    String identifier,
-    String name,
-    Map<String, dynamic> option,
-  }) : super(identifier: identifier, name: name, option: option);
+  TencentTranslationEngine(TranslationEngineConfig config) : super(config);
 
   String get type => kEngineTypeTencent;
 

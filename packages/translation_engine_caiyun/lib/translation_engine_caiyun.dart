@@ -16,11 +16,7 @@ class CaiyunTranslationEngine extends TranslationEngine {
     _kEngineOptionKeyRequestId,
   ];
 
-  CaiyunTranslationEngine({
-    String identifier,
-    String name,
-    Map<String, dynamic> option,
-  }) : super(identifier: identifier, name: name, option: option);
+  CaiyunTranslationEngine(TranslationEngineConfig config) : super(config);
 
   String get type => kEngineTypeCaiyun;
 

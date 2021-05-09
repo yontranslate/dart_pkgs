@@ -15,11 +15,7 @@ class DeepLTranslationEngine extends TranslationEngine {
     _kEngineOptionKeyAuthKey,
   ];
 
-  DeepLTranslationEngine({
-    String identifier,
-    String name,
-    Map<String, dynamic> option,
-  }) : super(identifier: identifier, name: name, option: option);
+  DeepLTranslationEngine(TranslationEngineConfig config) : super(config);
 
   String get type => kEngineTypeDeepL;
 

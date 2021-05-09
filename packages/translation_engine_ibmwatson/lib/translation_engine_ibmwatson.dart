@@ -20,11 +20,7 @@ class IBMWatsonTranslationEngine extends TranslationEngine {
     _kEngineOptionKeyApiUrl,
   ];
 
-  IBMWatsonTranslationEngine({
-    String identifier,
-    String name,
-    Map<String, dynamic> option,
-  }) : super(identifier: identifier, name: name, option: option);
+  IBMWatsonTranslationEngine(TranslationEngineConfig config) : super(config);
 
   String get type => kEngineTypeIBMWatson;
 

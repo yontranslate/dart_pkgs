@@ -22,11 +22,7 @@ class SogouTranslationEngine extends TranslationEngine {
     _kEngineOptionKeyKey,
   ];
 
-  SogouTranslationEngine({
-    String identifier,
-    String name,
-    Map<String, dynamic> option,
-  }) : super(identifier: identifier, name: name, option: option);
+  SogouTranslationEngine(TranslationEngineConfig config) : super(config);
 
   String get type => kEngineTypeSogou;
 

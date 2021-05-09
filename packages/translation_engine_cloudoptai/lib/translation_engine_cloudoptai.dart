@@ -10,11 +10,7 @@ const String kEngineTypeCloudoptAI = 'cloudoptai';
 class CloudoptAITranslationEngine extends TranslationEngine {
   String get type => kEngineTypeCloudoptAI;
 
-  CloudoptAITranslationEngine({
-    String identifier,
-    String name,
-    Map<String, dynamic> option,
-  }) : super(identifier: identifier, name: name, option: option);
+  CloudoptAITranslationEngine(TranslationEngineConfig config) : super(config);
 
   @override
   Future<LookUpResponse> lookUp(LookUpRequest request) async {

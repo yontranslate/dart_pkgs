@@ -25,11 +25,7 @@ class YoudaoTranslationEngine extends TranslationEngine {
     _kEngineOptionKeyAppSecret,
   ];
 
-  YoudaoTranslationEngine({
-    String identifier,
-    String name,
-    Map<String, dynamic> option,
-  }) : super(identifier: identifier, name: name, option: option);
+  YoudaoTranslationEngine(TranslationEngineConfig config) : super(config);
 
   String get type => kEngineTypeYoudao;
 

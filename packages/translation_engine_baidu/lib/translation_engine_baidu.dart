@@ -22,11 +22,7 @@ class BaiduTranslationEngine extends TranslationEngine {
     _kEngineOptionKeyAppKey,
   ];
 
-  BaiduTranslationEngine({
-    String identifier,
-    String name,
-    Map<String, dynamic> option,
-  }) : super(identifier: identifier, name: name, option: option);
+  BaiduTranslationEngine(TranslationEngineConfig config) : super(config);
 
   String get type => kEngineTypeBaidu;
 

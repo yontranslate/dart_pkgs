@@ -14,11 +14,7 @@ class IcibaTranslationEngine extends TranslationEngine {
     _kEngineOptionKeyApiKey,
   ];
 
-  IcibaTranslationEngine({
-    String identifier,
-    String name,
-    Map<String, dynamic> option,
-  }) : super(identifier: identifier, name: name, option: option);
+  IcibaTranslationEngine(TranslationEngineConfig config) : super(config);
 
   String get type => kEngineTypeIciba;
 
