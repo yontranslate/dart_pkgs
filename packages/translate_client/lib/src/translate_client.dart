@@ -1,15 +1,16 @@
 import 'translation_engine.dart';
+import 'translate_client_adapter.dart';
 
 class TranslateClient {
-  final List<TranslationEngine> engines;
+  final TranslateClientAdapter adapter;
 
-  TranslateClient(this.engines);
+  TranslateClient(this.adapter);
 
   TranslationEngine get firstEngine {
-    return engines.first;
+    return adapter.first;
   }
 
   TranslationEngine use(String identifier) {
-    return engines.firstWhere((e) => e.identifier == identifier);
+    return adapter.use(identifier);
   }
 }

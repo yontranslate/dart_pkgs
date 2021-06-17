@@ -4,14 +4,16 @@ import 'models/translate_request.dart';
 import 'models/translate_response.dart';
 
 class TranslationEngineConfig {
-  final String type;
   final String identifier;
-  final String name;
-  final Map<String, dynamic> option;
+  String type;
+  String name;
+  Map<String, dynamic> option;
+
+  String get shortId => identifier.substring(0, 4);
 
   TranslationEngineConfig({
-    this.type,
     this.identifier,
+    this.type,
     this.name,
     this.option,
   });
@@ -20,13 +22,21 @@ class TranslationEngineConfig {
     if (json == null) return null;
 
     return TranslationEngineConfig(
-      type: json['type'],
       identifier: json['identifier'],
+      type: json['type'],
       name: json['name'],
       option: json['option'] != null
           ? Map<String, dynamic>.from(json['option'])
           : null,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'identifier': identifier,
+      'type': type,
+      'option': option,
+    };
   }
 }
 
